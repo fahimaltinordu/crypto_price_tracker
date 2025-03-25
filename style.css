@@ -1,0 +1,119 @@
+* {
+    padding:0;
+    outline: 0;
+    margin: 0;
+    border:0;
+    box-sizing: border-box;
+}
+body {
+    padding:15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+body h1 {
+    text-align: center;
+    color:chocolate;
+}
+#searchContainer {
+    width:60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:15px;
+    padding:10px 15px;
+}
+#searchInput {
+    border:1px solid chocolate;
+    height:40px;
+    border-radius:4px;
+    text-align: center;
+    flex:8;
+}
+#searchInput::placeholder {
+    text-align: center;
+}
+#searchBtn {
+    background-color: chocolate;
+    padding:10px 8px;
+    border-radius: 4px;
+    height:40px;
+    color: white;
+    font-weight: bold;
+    cursor:pointer;
+    flex:1;
+}
+#container {
+    align-self: normal;
+    margin-top:15px;
+}
+.coin {
+    background-color: floralwhite;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    gap:5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.coin:nth-child(1) {
+    padding: 15px 10px;
+}
+.coin:hover {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.coinIcon {
+    width:40px;
+}
+.rank, .name, .symbol, .changeD, .price, .rankT, .nameT, .symbolT, .changeDT, .priceT {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+.rank, .symbol, .rankT, .symbolT {
+    flex:1;
+}
+.rank, .changeD {
+    font-weight: bold;
+}
+
+.rankT, .nameT, .symbolT, .changeDT, .priceT {
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
+}
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index:1000;
+    display:none;
+}
+.loader img {
+    width:80px
+}
+
+.down {
+    color:red;
+}
+.up {
+    color:green;
+}
+
+@media only screen and (max-width: 600px) {
+    .rank, .name, .symbol, .changeD, .price, .rankT, .nameT, .symbolT, .changeDT, .priceT {
+        font-size: 10px;
+    }
+    body h1 {
+        font-size: 20px;
+    }
+    #searchContainer {
+        width:90%;
+    }
+  }
