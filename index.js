@@ -44,10 +44,10 @@ let getCoins = async(URL)=> {
             <p class="symbol">${coin.symbol}</p>
             <p class="name">${coin.name}</p>
             <p class="changeD ${String(coin.quotes.USD.percent_change_24h)[0] == '-' ? 'down':'up'}">${coin.quotes.USD.percent_change_24h} %</p>
-            <p class="price">$ ${new Intl.NumberFormat().format(coin.quotes.USD.price.toFixed(2))}</p>
+            <p class="price">$ ${String(coin.quotes.USD.price)[0]=='0' ? coin.quotes.USD.price.toFixed(6) : new Intl.NumberFormat().format(coin.quotes.USD.price.toFixed(2)) }</p>
         </div>` 
 
-        
+        // ${new Intl.NumberFormat().format(coin.quotes.USD.price.toFixed(2))} 
     })
     
     let title = '';
@@ -62,14 +62,6 @@ let getCoins = async(URL)=> {
 
     loader.style.display = 'none';
     container.innerHTML = title+dom;
-
-    // let change = document.querySelector('.changeD')
-    //     console.log(change);
-    //     if (change.textContent[0] == '-') {
-    //         change.classList.add("down");
-    //     }else {
-    //         change.classList.add("up");
-    //     }
     
 
     // firstPage = nextPage;
