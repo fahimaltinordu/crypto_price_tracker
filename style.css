@@ -47,6 +47,7 @@ body h1 {
 #container {
     align-self: normal;
     margin-top:15px;
+    position: relative;
 }
 .coin {
     background-color: floralwhite;
@@ -106,17 +107,26 @@ body h1 {
     color:green;
 }
 
+.zCont {
+    position:absolute;
+    left: 0;
+    top: 0;
+    /* transform: translate(-50%, -50%); */
+    z-index:1000;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    width: 100%;
+    background: #0000008f;
+}
 .modal {
     width:250px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    position:absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index:1000;
     padding: 20px;
     border-radius: 8px;
     gap:20px;

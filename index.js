@@ -34,15 +34,14 @@ let getCoinsWayTwo = (input)=> {
             console.log(i, data[i].symbol);
             let str = data[i].symbol;
             if(str.includes(input)) {
-                // alert(`Coin: ${data[i].name} \nPrice: ${data[i].quotes.USD.price} \nChange: ${data[i].quotes.USD.percent_change_24h}`)
                 
-                modal = `<div class="modal ${String(data[i].quotes.USD.percent_change_24h)[0] == '-' ? 'downM':'upM'}">
+                modal += `<div class="modal ${String(data[i].quotes.USD.percent_change_24h)[0] == '-' ? 'downM':'upM'}">
                             <img class= "coinIcon" src="https://static.coinpaprika.com/coin/${data[i].id}/logo.png" alt="">
-                            <h2>${data[i].name}</h2>
-                            <h3>$ ${data[i].quotes.USD.price}</h3>
+                            <h2>${data[i].symbol}</h2>
+                            <h3>$ ${data[i].quotes.USD.price.toFixed(6)}</h3>
                             <h2>${data[i].quotes.USD.percent_change_24h} %</h2>
                         </div>`
-                break
+                // break
             }
         } 
         if(modal == '') {
@@ -50,12 +49,14 @@ let getCoinsWayTwo = (input)=> {
         }
 
         var z = document.createElement('div');
+        z.className= 'zCont';
+
         z.innerHTML = modal;
-        document.body.appendChild(z); 
+        container.appendChild(z); 
 
         const myTimeout = setTimeout(stop, 5000);
         function stop() {
-            document.body.removeChild(z)
+            container.removeChild(z)
         }
     })
 }
