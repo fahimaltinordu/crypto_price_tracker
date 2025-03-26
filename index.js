@@ -1,20 +1,64 @@
 let baseUrl = 'https://api.coinpaprika.com/v1/tickers'
 let container = document.querySelector('#container');
 let loader = document.querySelector('.loader');
+let searchArea = document.querySelector('#searchInput');
+let searchBtn = document.querySelector('#searchBtn');
+let body = document.getElementsByTagName('body')[0];
 
-// let getCoinsWayTwo = ()=> {
-//     fetch(baseUrl)
-//     .then(response => {
-//         if (response.status != 200 || !response.ok) {
-//             alert(`HTTP error! Status: ${response.status}`)
-//         } else {
-//             return response.json()
-//         }
-//     })
-//     .then(data => {
-//         console.log(data);
-//     })
-// }
+searchBtn.addEventListener('click', ()=> {
+    let input = searchArea.value.toUpperCase();
+    console.log(input);
+
+    if(searchArea.value == '') {
+        alert('enter valid coin name')
+        return
+    }
+
+    getCoinsWayTwo(input)
+
+    searchArea.value ='';
+})   
+
+let getCoinsWayTwo = (input)=> {
+    fetch(baseUrl)
+    .then(response => {
+        if (response.status != 200 || !response.ok) {
+            alert(`HTTP error! Status: ${response.status}`)
+        } else {
+            return response.json()
+        }
+    })
+    .then(data => {
+        let modal = '';
+        for(let i = 0 ; i<data.length; i++) {
+            console.log(i, data[i].symbol);
+            let str = data[i].symbol;
+            if(str.includes(input)) {
+                // alert(`Coin: ${data[i].name} \nPrice: ${data[i].quotes.USD.price} \nChange: ${data[i].quotes.USD.percent_change_24h}`)
+                
+                modal = `<div class="modal ${String(data[i].quotes.USD.percent_change_24h)[0] == '-' ? 'downM':'upM'}">
+                            <img class= "coinIcon" src="https://static.coinpaprika.com/coin/${data[i].id}/logo.png" alt="">
+                            <h2>${data[i].name}</h2>
+                            <h3>$ ${data[i].quotes.USD.price}</h3>
+                            <h2>${data[i].quotes.USD.percent_change_24h} %</h2>
+                        </div>`
+                break
+            }
+        } 
+        if(modal == '') {
+            alert('NOT FOUND')
+        }
+
+        var z = document.createElement('div');
+        z.innerHTML = modal;
+        document.body.appendChild(z); 
+
+        const myTimeout = setTimeout(stop, 5000);
+        function stop() {
+            document.body.removeChild(z)
+        }
+    })
+}
 
 let getCoins = async(URL)=> {
     loader.style.display = 'block';
@@ -70,4 +114,4 @@ let getCoins = async(URL)=> {
 
 getCoins(baseUrl)
 
-    
+ 
