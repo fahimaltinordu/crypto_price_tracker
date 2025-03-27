@@ -81,6 +81,8 @@ let getCoinsWayTwo = (input)=> {
         const myTimeout = setTimeout(stop, 5000);
         function stop() {
             container.removeChild(z)
+            typeahead = '';
+            searchArea.value ='';
         }
     })
 }
