@@ -17,7 +17,30 @@ searchBtn.addEventListener('click', ()=> {
     getCoinsWayTwo(input)
 
     searchArea.value ='';
-})   
+}) 
+
+let bounce = null;
+let typeahead = '';
+searchArea.addEventListener('keyup', (e)=> {
+
+    clearTimeout(bounce);
+    
+    let char = String.fromCharCode(e.which);
+    if (/[a-z]/i.test(char)) {
+        typeahead += e.key.toUpperCase();
+        console.log(typeahead);
+    }
+
+    bounce = setTimeout(debounce, 1000);
+    
+    function debounce() {
+        getCoinsWayTwo(typeahead)
+        
+    }
+
+
+
+})
 
 let getCoinsWayTwo = (input)=> {
     fetch(baseUrl)
@@ -25,13 +48,14 @@ let getCoinsWayTwo = (input)=> {
         if (response.status != 200 || !response.ok) {
             alert(`HTTP error! Status: ${response.status}`)
         } else {
+            console.log(response);
             return response.json()
         }
     })
     .then(data => {
         let modal = '';
         for(let i = 0 ; i<data.length; i++) {
-            console.log(i, data[i].symbol);
+            // console.log(i, data[i].symbol);
             let str = data[i].symbol;
             if(str.includes(input)) {
                 
@@ -44,9 +68,9 @@ let getCoinsWayTwo = (input)=> {
                 // break
             }
         } 
-        if(modal == '') {
-            alert('NOT FOUND')
-        }
+        // if(modal == '') {
+        //     alert('NOT FOUND')
+        // }
 
         var z = document.createElement('div');
         z.className= 'zCont';
@@ -57,6 +81,8 @@ let getCoinsWayTwo = (input)=> {
         const myTimeout = setTimeout(stop, 5000);
         function stop() {
             container.removeChild(z)
+            typeahead = '';
+            searchArea.value ='';
         }
     })
 }
